@@ -3,11 +3,13 @@
 #include <SFML/Audio.hpp>
 
 #include <vector>
+#include <iostream>
 
 #include "Window.hpp"
 #include "Shader.hpp"
 #include "VertexArray.hpp"
 #include "VertexBuffer.hpp"
+#include "RoomLoader.hpp"
 
 const int WINDOW_WIDTH = 1600;
 const int WINDOW_HEIGHT = 900;
@@ -39,6 +41,12 @@ int main()
 
   sf::Sound sound(buffer);
   sound.play();
+
+
+  RoomLoader::LoadRoomFromFile("prison_cell", RESOURCES_PATH "rooms/prison_cell.json");
+  Room* room = RoomLoader::GetRoom("prison_cell");
+
+  std::cout << "Room name: " << room->name_ << "\nItem name: " << room->item_.name_ << std::endl;
 
   while(window.IsOpen())
   {

@@ -1,0 +1,7 @@
+{
+	"id": "prison_cell",
+	"name": "Prison Cell",
+	"connected_rooms": [
+		""
+	]
+}

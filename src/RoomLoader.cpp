@@ -39,25 +39,19 @@ Room RoomLoader::ParseRoomFromJson(const nlohmann::json& j)
 	Room room;
 
 	// Load general room data
+	room.name_ = j.at("name").get<std::string>();
 	room.connectedRooms_ = j.at("connected_rooms").get<std::vector<std::string>>();
 	room.dialogue_ = j.at("dialogue").get<std::string>();
 
-	/**
-	 * May explicitly add into json files that there is no item/enemy
-	 * Ex:
-	 * "enemy": "none"
-	 * "item": "none"
-	 */
-
 	// Load item data if there is an item to be found in the current room
-	if(j.at("item"))
+	if(j.contains("item"))
 	{
 		room.item_.name_ = j.at("item").at("name").get<std::string>();
 		room.item_.strengthPoints_ = j.at("item").at("strength_points").get<int>();
 	}
 
 	// Load enemy data if there is an enemy in the current room
-	if(j.at("enemy"))
+	if(j.contains("enemy"))
 	{
 		room.enemy_.name_ = j.at("enemy").at("name").get<std::string>();
 		room.enemy_.health_ = j.at("enemy").at("health").get<int>();
