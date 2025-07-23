@@ -40,8 +40,14 @@ Room RoomLoader::ParseRoomFromJson(const nlohmann::json& j)
 
 	// Load general room data
 	room.name_ = j.at("name").get<std::string>();
-	room.connectedRooms_ = j.at("connected_rooms").get<std::vector<std::string>>();
 	room.dialogue_ = j.at("dialogue").get<std::string>();
+
+	// Load connected rooms
+	nlohmann::json connectedRooms = j.at("connected_rooms");
+	for (auto& roomPair : connectedRooms.items())
+	{
+		room.connectedRooms_[roomPair.key()] = roomPair.value();	
+	}
 
 	// Load item data if there is an item to be found in the current room
 	if(j.contains("item"))

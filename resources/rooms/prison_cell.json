@@ -1,8 +1,9 @@
 {
 	"name": "Prison Cell",
-	"connected_rooms": [
-		"common_area"
-	],
+	"connected_rooms": {
+		"east": "common_area",
+		"north": "test"
+	},
 	"dialogue": "I can't believe they have me locked in here 23 hours a day! And all just because I missappropriated some shareholder's funds! I have got to get out of here... TODAY!",
 	"item": {
 		"name": "butter sock",

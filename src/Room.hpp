@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <vector>
+#include <map>
 
 #include "Item.hpp"
 #include "Enemy.hpp"
@@ -9,9 +9,9 @@ struct Room
 {
 	Room() {};
 	
-	std::string                 name_;
-	std::vector<std::string> connectedRooms_;
-	std::string                 dialogue_;
-	Item                        item_;
-	Enemy                       enemy_;
+	std::string                        name_;
+	std::string                        dialogue_;
+	Item                               item_;
+	Enemy                              enemy_;
+	std::map<std::string, std::string> connectedRooms_;
 };

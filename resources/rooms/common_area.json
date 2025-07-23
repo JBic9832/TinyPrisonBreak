@@ -1,0 +1,13 @@
+{
+	"name": "Common Area",
+	"connected_rooms": {
+		"north": "showers",
+		"east": "supply_room",
+		"west": "prison_cell",
+	},
+	"dialogue": "Look at all of these scumbags... I am NOTHING like them...",
+	"enemy": {
+		THIS IS NOT COMPLETE AND WILL BREAK EVERYTHING IF THIS IS NOT REMOVED!!!!!
+		"name": "Vinnie Venturefraud"
+	}
+}

@@ -14,8 +14,7 @@ public:
 	//Implement: Translate (similar to set position but give a delta not an exact position)
 
 private:
-	glm::vec3 position_;
-	glm::quat rotation_;
-	glm::vec3 scale_;
+	glm::vec2 position_;
+	glm::vec2 scale_;
 
 };
