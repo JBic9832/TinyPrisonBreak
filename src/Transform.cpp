@@ -5,18 +5,16 @@ Transform::Transform()
 	, scale_ { glm::vec3(0.0f) }
 { }
 
-void Transform::SetPosition(float x, float y, float z)
+void Transform::SetPosition(float x, float y)
 {
-	glm::vec3 newPositionVector{x, y, z};
+	glm::vec2 newPositionVector{x, y};
 	position_.x = newPositionVector.x;
 	position_.y = newPositionVector.y;
-	position_.z = newPositionVector.z;
 }
 
-void Transform::SetScale(float x, float y, float z)
+void Transform::SetScale(float x, float y)
 {
-	glm::vec3 newScaleVector{x, y, z};
+	glm::vec2 newScaleVector{x, y};
 	scale_.x = newScaleVector.x;
 	scale_.y = newScaleVector.y;
-	scale_.z = newScaleVector.z;
 }

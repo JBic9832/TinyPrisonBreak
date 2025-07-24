@@ -7,8 +7,8 @@ class Transform
 public:
 	Transform();
 
-	void SetPosition(float x, float y, float z);
-	void SetScale(float x, float y, float z);
+	void SetPosition(float x, float y);
+	void SetScale(float x, float y);
 
 	//TODO:
 	//Implement: Translate (similar to set position but give a delta not an exact position)
