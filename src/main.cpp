@@ -10,6 +10,7 @@
 #include "VertexArray.hpp"
 #include "VertexBuffer.hpp"
 #include "RoomLoader.hpp"
+#include "Input.hpp"
 
 const int WINDOW_WIDTH = 1600;
 const int WINDOW_HEIGHT = 900;
@@ -51,6 +52,12 @@ int main()
   while(window.IsOpen())
   {
     window.Clear(GL_COLOR_BUFFER_BIT);
+
+	if(Input::isKeyPressed(GLFW_KEY_SPACE))
+		std::cout << "Space key was pressed" << std::endl;
+
+	if(Input::isKeyDown(GLFW_KEY_W))
+		std::cout << "W key is being held" << std::endl;
 
     shader.Bind();
     glDrawArrays(GL_TRIANGLES, 0, 3);

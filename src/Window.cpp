@@ -1,5 +1,6 @@
 #include "Window.hpp"
 #include "GLFW/glfw3.h"
+#include "Input.hpp"
 #include <GL/gl.h>
 #include <iostream>
 
@@ -36,6 +37,7 @@ void TinyOglWindow::CreateWindow()
   }
 
   glfwMakeContextCurrent(window_);
+  Input::initialize(window_);
 }
 
 void TinyOglWindow::InitGlad()
