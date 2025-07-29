@@ -9,8 +9,8 @@ class TexturedRect
 {
 public:
 	TexturedRect() {};
-	TexturedRect(const std::string& texturePath, Shader shader);
-	void Draw(int x, int y, glm::mat4 proj, glm::mat4 view);
+	TexturedRect(const std::string& texturePath, const std::string& shader, float width, float height);
+	void Draw(float x, float y, glm::mat4 proj, glm::mat4 view);
 	glm::mat4 GetProjectionMatrix() const;
 
 private:
@@ -19,4 +19,5 @@ private:
 	unsigned int textureId_;
 	Shader shader_;
 	glm::mat4 modelMatrix_;
+	float width_, height_;
 };

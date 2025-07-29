@@ -12,6 +12,7 @@
 #include "RoomLoader.hpp"
 #include "Input.hpp"
 #include "Player.hpp"
+#include "ResourceManager.hpp"
 
 const int WINDOW_WIDTH = 1600;
 const int WINDOW_HEIGHT = 900;
@@ -35,8 +36,7 @@ int main()
  // vertexBuffer.FillBufferData(verts, GL_STATIC_DRAW);
  // vertexBuffer.EnableVertexAttribArray(0, 3, GL_FLOAT, false, 0, (void*)0);
 
-  Shader shader(RESOURCES_PATH "basicVert.glsl", RESOURCES_PATH "basicFrag.glsl");
-
+  Shader shader = ResourceManager::LoadShader(RESOURCES_PATH "basicVert.glsl", RESOURCES_PATH "basicFrag.glsl", "basic");
   sf::SoundBuffer buffer;
   if(!buffer.loadFromFile(RESOURCES_PATH "sound.wav"))
 	  return -1;
@@ -47,31 +47,33 @@ int main()
 
   RoomLoader::LoadRoomFromFile("prison_cell", RESOURCES_PATH "rooms/prison_cell.json");
   Room* room = RoomLoader::GetRoom("prison_cell");
-  Player player(50, 50);
+  Player player(50, 50, "basic");
+  TexturedRect tr("", "basic", 200, 200);
 
   std::cout << "Room name: " << room->name_ << "\nItem name: " << room->item_.name_ << std::endl;
 
   glm::mat4 view = glm::mat4(1.0f);
   glm::mat4 proj = glm::ortho(0.0f, (float)window.GetWindowWidth(), (float)window.GetWindowHeight(), 0.0f);
 
+  float deltaTime = 0.0f;
+  float lastTime = 0.0f;
+
   while(window.IsOpen())
   {
-    window.Clear(GL_COLOR_BUFFER_BIT);
+	  float currentTime = static_cast<float>(glfwGetTime());
+	  deltaTime = currentTime - lastTime;
+	  lastTime = currentTime;
 
-	if(Input::isKeyPressed(GLFW_KEY_SPACE))
-		std::cout << "Space key was pressed" << std::endl;
+	  window.Clear(GL_COLOR_BUFFER_BIT);
 
-	if(Input::isKeyDown(GLFW_KEY_W))
-		std::cout << "W key is being held" << std::endl;
+	  shader.Bind();
+	  player.Update(deltaTime);
+	  player.Draw(proj, view);
+	  glUseProgram(0);
 
-    shader.Bind();
-	player.Draw(proj, view);
-	//glDrawArrays(GL_TRIANGLES, 0, 3);
-    glUseProgram(0);
-
-    window.SwapAndPoll();
+	  window.SwapAndPoll();
   }
-  
+
   return 0;
 }
 

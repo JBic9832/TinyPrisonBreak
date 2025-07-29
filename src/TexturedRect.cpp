@@ -1,15 +1,18 @@
 #include "TexturedRect.hpp"
 #include <vector>
 #include <glm/gtc/matrix_transform.hpp>
+#include "ResourceManager.hpp"
 
 //TODO
 //	TexturedRect constructor takes in std::string& to look up shader.
 //	Shader creation is handled by a resource manager which holds a static
 //	map of all shader programs
 
-TexturedRect::TexturedRect(const std::string& textureFilePath, Shader shader)
+TexturedRect::TexturedRect(const std::string& textureFilePath, const std::string& shader, float width, float height)
+	: width_ { width }
+	, height_ { height }
 {
-	shader_ = shader;
+	shader_ = ResourceManager::GetShader(shader);
 
 	modelMatrix_ = glm::mat4(1.0f);
 	std::vector<float> verts = {
@@ -30,11 +33,11 @@ TexturedRect::TexturedRect(const std::string& textureFilePath, Shader shader)
 	vbo_.EnableVertexAttribArray(0, 3, GL_FLOAT, false, 0, (void*)0);
 }
 
-void TexturedRect::Draw(int x, int y, glm::mat4 proj, glm::mat4 view)
+void TexturedRect::Draw(float x, float y, glm::mat4 proj, glm::mat4 view)
 {
 	modelMatrix_ = glm::mat4(1.0f);
 	modelMatrix_ = glm::translate(modelMatrix_, glm::vec3(x, y, 0.0f));
-	modelMatrix_ = glm::scale(modelMatrix_, glm::vec3(25.0f, 25.0f, 1.0f));
+	modelMatrix_ = glm::scale(modelMatrix_, glm::vec3(width_, height_, 1.0f));
 	vao_.Bind();
 	shader_.Bind();
 	shader_.SetUniformMat4f("model", modelMatrix_);
