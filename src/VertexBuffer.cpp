@@ -5,7 +5,7 @@ VertexBuffer::VertexBuffer()
 	glGenBuffers(1, &rendererId_);
 }
 
-void VertexBuffer::FillBufferData(std::vector<float>& data, unsigned int usage)
+void VertexBuffer::FillBufferData(std::vector<float> data, const unsigned int usage)
 {
 	glBindBuffer(GL_ARRAY_BUFFER, rendererId_);
 	glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(float), data.data(), usage);
